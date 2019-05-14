@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">FactoryTest</string>
+    <string name="success">通过</string>
+    <string name="failed">失败</string>
+
+    <string-array name="item_test">
+        <item>版本信息</item>
+        <item>背光测试</item>
+        <item>屏幕测试</item>
+        <item>按键测试</item>
+        <item>相机测试</item>
+        <item>充电器测试</item>
+        <item>wifi测试</item>
+        <item>录音测试</item>
+        <item>电容屏测试</item>
+        <item>喇叭测试</item>
+        <item>指纹测试</item>
+        <item>手写笔测试</item>
+    </string-array>
+
+
 </resources>
