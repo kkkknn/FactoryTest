@@ -2,6 +2,7 @@ package com.citrontek.FactoryTest;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +11,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.citrontek.FactoryTest.itemTest.VersionInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private String item;
-    private String[] itemList;
+    private String[] xmlList;
+    private List<Item> itemList=new ArrayList<>();
+    private ItemAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //查看String.xml文件，如果没有相应的测试方法直接弹警告框，然后退出软件
-        itemList=getItemListName();
-        if(itemList.length==0){
+        xmlList=getItemListName();
+        if(xmlList.length==0){
             WarringDialog("警告","配置文件中没有测试项目，请添加后再次尝试");
         }else{
             //绑定控件
@@ -35,8 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
     //初始化布局
     private void initView(){
+        for (String str:xmlList) {
+            Item item=new Item(str,0);
+            itemList.add(item);
+        }
+        arrayAdapter=new ItemAdapter(MainActivity.this,R.layout.item_layout,itemList);
         listView=findViewById(R.id.item_list);
-        listView.setAdapter(new ArrayAdapter<String>(MainActivity.this,R.layout.item_layout,R.id.item_name,itemList));
+        listView.setAdapter(arrayAdapter);
         setContentView(listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
     //根据点击的id来进行跳转
     private void searchByID(int id){
         Intent intent=null;
-        switch (itemList[id]){
+        int code=0;
+        switch (xmlList[id]){
             case "版本信息":
                 intent=new Intent(MainActivity.this,VersionInfo.class);
+                code=id;
                 break;
             case "背光测试":
                 break;
@@ -100,7 +114,16 @@ public class MainActivity extends AppCompatActivity {
         }
         //查找到了就直接跳转开始测试
         if(intent!=null){
-            startActivity(intent);
+            startActivityForResult(intent,code);
         }
+    }
+
+    //活动返回
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        int flag=data.getIntExtra("检测情况",RESULT_OK);
+        Item it=itemList.get(requestCode);
+        it.setValue(flag);
+        arrayAdapter.updateData(listView.getChildAt(requestCode),requestCode);
     }
 }
