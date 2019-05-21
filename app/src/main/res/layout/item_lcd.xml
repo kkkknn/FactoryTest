@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".itemTest.Lcd">
+
+    <TextView
+        android:id="@+id/test_lcd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/show_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="20dp"
+        android:textSize="22sp"
+        android:textColor="@color/colorWhite"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_marginBottom="50dp">
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:textColor="@color/green"
+            android:text="@string/success"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="100dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_error"
+            android:textColor="@color/colorRed"
+            android:text="@string/failed"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

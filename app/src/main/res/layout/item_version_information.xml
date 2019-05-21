@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".itemTest.VersionInfo">
     <!--codename   incremental  release  SDK  基带版本   版本号-->
     <!--board   model  device  manufacture   -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50sp">
+
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorWhite"
             android:gravity="center"
-            android:textSize="20sp"
-            android:text="软件信息版本"/>
+            android:text="软件信息版本"
+            android:textColor="#FF0000"
+            android:textSize="20sp" />
     </TableRow>
 
     <TableRow
@@ -171,13 +178,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/colorWhite"
             android:gravity="center"
-            android:textSize="20sp"
-            android:text="硬件信息"/>
+            android:text="硬件信息"
+            android:textColor="#FF0000"
+            android:textSize="20sp" />
     </TableRow>
 
 
@@ -280,29 +288,27 @@
             android:layout_weight="8"
             android:text="xxx"/>
     </TableRow>
+    </TableLayout>
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50sp"
         android:gravity="center">
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:text="@string/success"
+            android:textColor="@color/green" />
 
-            <Button
-                android:id="@+id/btn_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/success"
-                android:textColor="@color/green"/>
-
-            <Button
-                android:id="@+id/btn_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/failed"
-                android:textColor="@color/colorRed" />
-        </LinearLayout>
-    </TableRow>
-</TableLayout>
+        <Button
+            android:id="@+id/btn_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/failed"
+            android:textColor="@color/colorRed" />
+    </LinearLayout>
+</RelativeLayout>

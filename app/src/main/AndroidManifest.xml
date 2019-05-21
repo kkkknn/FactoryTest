@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".itemTest.VersionInfo"></activity>
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <activity android:name=".itemTest.Lcd"></activity>
+        <activity android:name=".itemTest.Backlight" />
+        <activity android:name=".itemTest.VersionInfo" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

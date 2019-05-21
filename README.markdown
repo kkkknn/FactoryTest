@@ -6,11 +6,12 @@ Android开发经验不足，有些逻辑比较啰嗦，有问题希望大家指�
 2019年5月13日：创建项目
 
 2019年5月20日：版本信息显示和返回
+2019年5月21日：背光测试
 
 ## 项目内容
 1. [主界面布局编写](#main_activity)
 1. [版本信息显示](#version_information)
-1. 屏幕颜色测试
+1. [屏幕颜色测试](#lcd)
 1. [背光灯测试](#backlight)
 1. 按键拦截测试
 1. 相机测试
@@ -30,8 +31,6 @@ Item类用来实现listview中子控件<br/>
 ItemAdapter类继承ArrayAdapter类重写getview方法和刷新方法<br/>
 
 界面切换通过startActivityForResult来实现，startActivityForResult来传递listview中的焦点位<br/>
-
-VersionInfo来触发检测完成后跳转回主界面，并将检测结果通过setResult中的参数来返回<br/>
 
 最终通过Mainactivity中的onActivityResult来获取和刷新listview数据
 
@@ -57,3 +56,15 @@ Build.MANUFACTURER            硬件制造商
 ~~~
 
 ### backlight
+要点：通过以下方法来设置屏幕背光,大小为浮点值0.0f~1.0f。
+    
+**此方法修改的背光亮度只在当前界面有效，一旦切换便会失效**
+
+~~~
+Window window = Backlight.this.getWindow();
+WindowManager.LayoutParams layoutParams = window.getAttributes();
+layoutParams.screenBrightness = back_light;
+window.setAttributes(layoutParams);
+~~~
+
+### lcd

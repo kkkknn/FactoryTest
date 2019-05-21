@@ -1,5 +1,6 @@
 package com.citrontek.FactoryTest.itemTest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import com.citrontek.FactoryTest.MainActivity;
 import com.citrontek.FactoryTest.R;
 
-public class VersionInfo extends AppCompatActivity {
+public class VersionInfo extends Activity {
     private TextView codename,incremental,release,sdk,baseband,display,
                         board,model,device,manufacture;
     private Button btn_ok,btn_error;
@@ -43,21 +44,22 @@ public class VersionInfo extends AppCompatActivity {
         btn_error=findViewById(R.id.btn_error);
 
         //按钮控件事件的绑定
-        // TODO: 2019/5/16 按钮事件：返回主界面，并将通过与否参数带回去 
         showVersion();
 
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //通过按钮
-                CallbackMain(1);
+                BackMain(1);
+                finish();
             }
         });
         btn_error.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //失败按钮
-                CallbackMain(-1);
+                BackMain(-1);
+                finish();
             }
         });
     }
@@ -79,12 +81,9 @@ public class VersionInfo extends AppCompatActivity {
         manufacture.setText(Build.MANUFACTURER);
     }
 
-    //返回结构给上层activity
-    private void CallbackMain(int value){
+    private void BackMain(int code){
         Intent intent=new Intent();
-        intent.putExtra("检测情况",value);
+        intent.putExtra("检测情况",code);
         setResult(RESULT_OK,intent);
-        //销毁当前活动
-        finish();
     }
 }

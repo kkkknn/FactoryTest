@@ -1,5 +1,6 @@
 package com.citrontek.FactoryTest;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -13,12 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.citrontek.FactoryTest.itemTest.Backlight;
+import com.citrontek.FactoryTest.itemTest.Lcd;
 import com.citrontek.FactoryTest.itemTest.VersionInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private ListView listView;
     private String item;
     private String[] xmlList;
@@ -83,15 +86,16 @@ public class MainActivity extends AppCompatActivity {
     //根据点击的id来进行跳转
     private void searchByID(int id){
         Intent intent=null;
-        int code=0;
+        int code=id;
         switch (xmlList[id]){
             case "版本信息":
                 intent=new Intent(MainActivity.this,VersionInfo.class);
-                code=id;
                 break;
             case "背光测试":
+                intent=new Intent(MainActivity.this, Backlight.class);
                 break;
             case "屏幕测试":
+                intent=new Intent(MainActivity.this, Lcd.class);
                 break;
             case "按键测试":
                 break;
@@ -121,9 +125,11 @@ public class MainActivity extends AppCompatActivity {
     //活动返回
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        int flag=data.getIntExtra("检测情况",RESULT_OK);
-        Item it=itemList.get(requestCode);
-        it.setValue(flag);
-        arrayAdapter.updateData(listView.getChildAt(requestCode),requestCode);
+        if(data!=null){
+            int flag=data.getIntExtra("检测情况",RESULT_OK);
+            Item it=itemList.get(requestCode);
+            it.setValue(flag);
+            arrayAdapter.updateData(listView.getChildAt(requestCode),requestCode);
+        }
     }
 }
