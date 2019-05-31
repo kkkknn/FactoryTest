@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".itemTest.Backlight">
+    tools:context=".itemTest.Camera_show">
 
-    <TextView
-        android:id="@+id/show_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="50sp"
+    <SurfaceView
+        android:id="@+id/camera_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:textColor="@color/colorWhite"
         android:textSize="22sp" />
@@ -40,5 +39,4 @@
         android:text="@string/failed"
         android:textSize="22sp"
         android:textColor="@color/colorRed" />
-
 </RelativeLayout>

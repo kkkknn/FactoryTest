@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".itemTest.Backlight">
+    tools:context=".itemTest.Key_down">
 
     <TextView
         android:id="@+id/show_msg"
@@ -40,5 +40,4 @@
         android:text="@string/failed"
         android:textSize="22sp"
         android:textColor="@color/colorRed" />
-
 </RelativeLayout>

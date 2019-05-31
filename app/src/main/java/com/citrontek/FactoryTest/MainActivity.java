@@ -5,16 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.citrontek.FactoryTest.itemTest.Backlight;
+import com.citrontek.FactoryTest.itemTest.Camera_show;
+import com.citrontek.FactoryTest.itemTest.Key_down;
 import com.citrontek.FactoryTest.itemTest.Lcd;
 import com.citrontek.FactoryTest.itemTest.VersionInfo;
 
@@ -98,8 +96,10 @@ public class MainActivity extends Activity {
                 intent=new Intent(MainActivity.this, Lcd.class);
                 break;
             case "按键测试":
+                intent=new Intent(MainActivity.this, Key_down.class);
                 break;
             case "相机测试":
+                intent=new Intent(MainActivity.this, Camera_show.class);
                 break;
             case "充电器测试":
                 break;

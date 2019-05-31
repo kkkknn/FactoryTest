@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.citrontek.FactoryTest">
+    <!-- 照相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        <activity android:name=".itemTest.Lcd"></activity>
+        <activity android:name=".itemTest.Camera_show"></activity>
+        <activity android:name=".itemTest.Key_down" />
+        <activity android:name=".itemTest.Lcd" />
         <activity android:name=".itemTest.Backlight" />
         <activity android:name=".itemTest.VersionInfo" />
         <activity android:name=".MainActivity">

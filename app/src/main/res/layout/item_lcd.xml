@@ -28,17 +28,20 @@
 
         <Button
             android:id="@+id/btn_ok"
-            android:textColor="@color/green"
-            android:text="@string/success"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="100dp"
-            android:layout_height="wrap_content" />
+            android:background="@drawable/btn_style"
+            android:text="@string/success"
+            android:textColor="@color/green"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btn_error"
             android:textColor="@color/colorRed"
             android:text="@string/failed"
             android:layout_width="wrap_content"
+            android:background="@drawable/btn_style"
             android:layout_marginLeft="100dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
