@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.citrontek.FactoryTest.itemTest.Backlight;
 import com.citrontek.FactoryTest.itemTest.Camera_show;
+import com.citrontek.FactoryTest.itemTest.Charger;
 import com.citrontek.FactoryTest.itemTest.Key_down;
 import com.citrontek.FactoryTest.itemTest.Lcd;
 import com.citrontek.FactoryTest.itemTest.VersionInfo;
@@ -102,6 +103,7 @@ public class MainActivity extends Activity {
                 intent=new Intent(MainActivity.this, Camera_show.class);
                 break;
             case "充电器测试":
+                intent=new Intent(MainActivity.this, Charger.class);
                 break;
             case "wifi测试":
                 break;
