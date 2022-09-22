@@ -22,7 +22,6 @@ project.ext {
             //公共的apply 主要是用于三方库
             extension.apply plugin: 'kotlin-android'
             extension.apply plugin: 'kotlin-parcelize'
-            extension.apply plugin: 'kotlin-kapt'
 
             appImplementation = "app"
             //设置项目的android
@@ -77,7 +76,6 @@ project.ext {
             }
             extension.apply plugin: 'kotlin-android'
             extension.apply plugin: 'kotlin-parcelize'
-            extension.apply plugin: 'kotlin-kapt'
 
             appImplementation = project.name
 
@@ -142,7 +140,7 @@ project.ext {
             extension.testImplementation 'junit:junit:4.+'
             extension.androidTestImplementation 'androidx.test.ext:junit:1.1.2'
             extension.androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-            extension.kapt 'com.alibaba:arouter-compiler:1.5.2'
+            extension.annotationProcessor  'com.alibaba:arouter-compiler:1.5.2'
             if(appImplementation!="lib_common"){
                 //lib_common，所有的Module都要依赖
                 extension.implementation extension.project(path: ':lib_common')
@@ -151,7 +149,6 @@ project.ext {
             switch (appImplementation) {
                 case "app":
                     extension.implementation extension.project(path: ':lib_base')
-                    extension.implementation extension.project(path: ':lib_common')
                     break
                 case "lib_base":
 

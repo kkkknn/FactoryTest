@@ -8,4 +8,6 @@
     <color name="colorRed">#FF0000</color>
     <color name="colorBlue">#0356FF</color>
     <color name="green">#05F508</color>
+    <color name="textColor">#030303</color>
+    <color name="textGrayColor">#656565</color>
 </resources>

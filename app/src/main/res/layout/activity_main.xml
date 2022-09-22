@@ -1,10 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/item_list"
     tools:context=".MainActivity">
 
-</ListView>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="logo"
+            android:src="@drawable/android" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设备名称"
+                android:textColor="@color/textGrayColor"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_deviceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A33"
+                android:textColor="@color/textColor"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="android版本"
+                android:textColor="@color/textGrayColor"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_androidVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="android 6.0"
+                android:textColor="@color/textColor"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="固件版本"
+                android:textColor="@color/textGrayColor"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_firmwareVersion"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
+                android:textColor="@color/textColor"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前电量"
+                android:textColor="@color/textGrayColor"
+                android:textSize="24sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100%"
+                android:textColor="@color/textColor"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <GridLayout
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_gravity="center"
+        android:columnCount="5"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.citrontek.FactoryTest.view.ModuleButton
+            android:padding="40dp"
+            android:background="@drawable/icon_btn_selector"
+            android:id="@+id/btn_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.citrontek.FactoryTest.view.ModuleButton
+            android:padding="40dp"
+            android:background="@drawable/icon_btn_selector"
+            android:id="@+id/btn_finger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.citrontek.FactoryTest.view.ModuleButton
+            android:padding="40dp"
+            android:background="@drawable/icon_btn_selector"
+            android:id="@+id/btn_pen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.citrontek.FactoryTest.view.ModuleButton
+            android:padding="40dp"
+            android:background="@drawable/icon_btn_selector"
+            android:id="@+id/btn_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.citrontek.FactoryTest.view.ModuleButton
+            android:padding="40dp"
+            android:background="@drawable/icon_btn_selector"
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.citrontek.FactoryTest.view.ModuleButton
+            android:padding="40dp"
+            android:background="@drawable/icon_btn_selector"
+            android:id="@+id/btn_speaker_mic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
