@@ -1,3 +1,4 @@
 include ':app'
 include ':lib_base'
 include ':lib_common'
+include ':module_screen'

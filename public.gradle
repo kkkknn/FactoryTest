@@ -1,8 +1,8 @@
 
 project.ext {
     //是否允许module单独调试
-    isModuleDebug = false
-    moduleName = ""//单独调试module名
+    isModuleDebug = true
+    moduleName = "module_screen"//单独调试module名
     //基础信息配置
     compileSdkVersion = 32
     buildToolsVersion = "32"
@@ -144,17 +144,23 @@ project.ext {
             if(appImplementation!="lib_common"){
                 //lib_common，所有的Module都要依赖
                 extension.implementation extension.project(path: ':lib_common')
+            }else {
+                extension.api 'com.alibaba:arouter-api:1.5.2'//ARouter依赖
             }
             //针对每个Module单独进行依赖
             switch (appImplementation) {
                 case "app":
                     extension.implementation extension.project(path: ':lib_base')
+                    extension.implementation extension.project(path: ':module_screen')
                     break
                 case "lib_base":
 
                     break
                 case "lib_common"://common组件是一个中间层，所有的组件都需要依赖此组件，公共的依赖便可放到这里
                     extension.api 'com.alibaba:arouter-api:1.5.2'//ARouter依赖
+                    break
+                case "module_screen":
+
                     break
             }
     }

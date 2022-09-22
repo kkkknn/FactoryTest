@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FactoryTest" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FactoryTest" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="21">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!--使背景延伸至状态栏-->
+        //注意：windowTranslucentNavigation 应该设置成false，否则在底部有虚拟导航按键时，会出现虚拟导航按键和底部内容重合。
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+
     </style>
 </resources>

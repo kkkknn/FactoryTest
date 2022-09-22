@@ -1,36 +1,20 @@
 package com.citrontek.FactoryTest;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import android.graphics.Color;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.citrontek.FactoryTest.itemTest.Backlight;
-import com.citrontek.FactoryTest.itemTest.Camera_show;
-import com.citrontek.FactoryTest.itemTest.Charger;
-import com.citrontek.FactoryTest.itemTest.Key_down;
-import com.citrontek.FactoryTest.itemTest.Lcd;
-import com.citrontek.FactoryTest.itemTest.VersionInfo;
 import com.citrontek.FactoryTest.view.ModuleButton;
+import com.kkkkkn.lib_common.CommonActivity;
 import com.kkkkkn.lib_common.ModuleConstant;
+import com.kkkkkn.lib_common.router.CommonRouterConstant;
+import com.kkkkkn.lib_common.util.OnClickUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends CommonActivity implements View.OnClickListener {
     private static final String TAG="MainActivity";
     private AppCompatTextView deviceName,deviceVersion,firmwareVersion,power;
 
@@ -40,6 +24,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         initView();
         initInfo();
+    }
+
+    @Override
+    protected boolean isDebug() {
+        return BuildConfig.DEBUG;
     }
 
     /**
@@ -93,6 +82,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
+        //防止过快点击多次跳转
+        if(OnClickUtil.isTooFast()){
+            return;
+        }
+        int id =view.getId();
+        if(id==R.id.btn_screen){
+            ARouter.getInstance().build(CommonRouterConstant.SCREEN).navigation();
+        }
     }
 }
