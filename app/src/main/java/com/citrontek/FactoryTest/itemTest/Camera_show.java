@@ -172,6 +172,7 @@ public class Camera_show extends Activity {
             //后置摄像头
             result=(cameraInfo.orientation-degrees+360)%360;
         }
+        Log.i(TAG, "setCameraDisplayOrientation 变量数字是: "+result+"===222==="+degrees);
         camera.setDisplayOrientation(result);
     }
 

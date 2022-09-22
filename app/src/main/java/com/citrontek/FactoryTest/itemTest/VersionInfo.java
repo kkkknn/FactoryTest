@@ -3,14 +3,12 @@ package com.citrontek.FactoryTest.itemTest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.citrontek.FactoryTest.MainActivity;
 import com.citrontek.FactoryTest.R;
 
 public class VersionInfo extends Activity {

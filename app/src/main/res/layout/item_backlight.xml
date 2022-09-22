@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="50sp"
         android:layout_centerInParent="true"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlue"
         android:textSize="22sp" />
 
     <Button
