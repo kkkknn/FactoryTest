@@ -10,6 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FactoryTest">
         <activity
+            android:name=".bad_points.BadPointsActivity"
+            android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".black_light.BlackLightActivity"
+            android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ScreenActivity"
             android:exported="true">
             <intent-filter>

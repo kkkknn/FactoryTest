@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">module_screen</string>
+    <string name="lcd_blackLight">屏幕背光测试</string>
+    <string name="lcd_badPoints">屏幕坏点测试</string>
+    <string name="lcd_touch">触摸屏测试</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- backlight -->
+    <string name="backlight_title">背光和键盘灯测试"</string>
+    <string name="backlight_desc">请检查背光灯和按键灯是否正常，点击屏幕开始</string>
+    <string name="backlight_on">背光和键盘灯开启</string>
+    <string name="backlight_off">背光和键盘灯关闭</string>
+    <string name="backlight_def">背光和键盘灯恢复</string>
+
+    <!-- lcd -->
+    <string name="lcd_title">LCD测试-检查屏幕坏点</string>
+    <string name="lcd_desc">屏幕会显示不同颜色，请检查屏幕是否有黑点和亮点，点击屏幕开始</string>
 </resources>

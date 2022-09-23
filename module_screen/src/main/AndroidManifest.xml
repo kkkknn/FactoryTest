@@ -4,5 +4,11 @@
     <application>
         <activity
             android:name=".ScreenActivity" />
+        <activity android:name=".black_light.BlackLightActivity"
+            android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer"
+            />
+        <activity android:name=".bad_points.BadPointsActivity"
+            android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer"
+            />
     </application>
 </manifest>

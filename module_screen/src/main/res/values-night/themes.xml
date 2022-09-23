@@ -19,4 +19,9 @@
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
+
+    <style name="ThemeOverlay.FactoryTest.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
+        <item name="fullscreenTextColor">@color/light_blue_A400</item>
+    </style>
 </resources>

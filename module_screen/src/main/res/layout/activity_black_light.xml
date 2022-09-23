@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".black_light.BlackLightActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:clickable="true"
+        android:id="@+id/backlight_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="30sp"
+        android:background="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/backlight_desc"
+        android:textAppearance="?android:attr/textAppearance"
+        android:visibility="visible"
+        android:focusable="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/backlight_step"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:textSize="30sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/backlight_on"
+        android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@color/black"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

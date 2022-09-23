@@ -10,24 +10,31 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_blackLight"
             android:layout_margin="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="屏幕背光测试"/>
+            android:text="@string/lcd_blackLight"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_badPoints"
             android:layout_margin="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="屏幕坏点测试" />
+            android:text="@string/lcd_badPoints" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_touch"
             android:layout_margin="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="触摸屏测试"/>
+            android:text="@string/lcd_touch"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>
