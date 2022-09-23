@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FingerActivity">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cf100"
+            android:layout_margin="20dp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:textSize="25sp"
+            android:text="@string/cf100_desc"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cf200"
+            android:layout_margin="20dp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:textSize="25sp"
+            android:text="@string/cf200_desc"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_zk"
+            android:layout_margin="20dp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:textSize="25sp"
+            android:text="@string/zk_desc"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

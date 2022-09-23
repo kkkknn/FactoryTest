@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".zk_fs200r.ZKActivity">
+    <TextView
+        android:id="@+id/txtReport"
+        android:layout_width="379dp"
+        android:layout_height="23dp"
+        android:text="Hello World!" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="379dp"
+        android:layout_height="23dp"
+        android:layout_below="@id/txtReport" />
+    <Button
+        android:id="@+id/bnOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="OnBnOpen"
+        android:text="连接"
+        android:layout_below="@id/txtStatus" />
+
+    <Button
+        android:id="@+id/bnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="OnBnClose"
+        android:text="断开"
+        android:layout_below="@id/bnOpen" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="256dp"
+        android:layout_height="360dp"
+        app:srcCompat="@drawable/show"
+        android:layout_toRightOf="@id/bnOpen"
+        android:layout_below="@id/txtStatus"/>
+
+    <Button
+        android:id="@+id/bnVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bnClose"
+        android:layout_marginTop="14dp"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView"
+        android:onClick="OnBnVerify"
+        android:text="Button" />
+</RelativeLayout>
+
+

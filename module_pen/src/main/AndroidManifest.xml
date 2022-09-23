@@ -10,17 +10,11 @@
             android:name=".a83.A83Activity"
             android:exported="false"
             android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".a33.A33Activity"
             android:exported="false"
             android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
     </application>
 </manifest>

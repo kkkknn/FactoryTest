@@ -91,6 +91,8 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             ARouter.getInstance().build(CommonRouterConstant.SCREEN).navigation();
         }else if(id==R.id.btn_pen){
             ARouter.getInstance().build(CommonRouterConstant.PEN).navigation();
+        }else if(id==R.id.btn_finger){
+            ARouter.getInstance().build(CommonRouterConstant.FINGER).navigation();
         }
     }
 }

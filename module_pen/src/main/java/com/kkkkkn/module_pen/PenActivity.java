@@ -35,6 +35,7 @@ public class PenActivity extends AppCompatActivity implements View.OnClickListen
             //android 6.0 a83 设备
             btn_a83.setVisibility(View.VISIBLE);
             btn_a33.setVisibility(View.GONE);
+
         }else {
             //弹窗然后直接退出
             Toasty.error(this, "此设备非本公司设备，不支持手写笔SDK", Toast.LENGTH_SHORT, true).show();
