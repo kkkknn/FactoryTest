@@ -17,6 +17,7 @@ import com.kkkkkn.lib_common.router.CommonRouterConstant;
 import com.kkkkkn.lib_common.util.OnClickUtil;
 import com.kkkkkn.module_screen.bad_points.BadPointsActivity;
 import com.kkkkkn.module_screen.black_light.BlackLightActivity;
+import com.kkkkkn.module_screen.touch.TouchActivity;
 
 @Route(path = CommonRouterConstant.SCREEN)
 public class ScreenActivity extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +54,7 @@ public class ScreenActivity extends AppCompatActivity implements View.OnClickLis
         }else if(id==R.id.btn_badPoints){
             intent=new Intent(ScreenActivity.this, BadPointsActivity.class);
         }else if(id==R.id.btn_touch){
-
+            intent=new Intent(ScreenActivity.this, TouchActivity.class);
         }
 
         if(intent!=null){

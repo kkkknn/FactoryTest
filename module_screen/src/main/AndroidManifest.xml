@@ -10,5 +10,8 @@
         <activity android:name=".bad_points.BadPointsActivity"
             android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer"
             />
+        <activity android:name=".touch.TouchActivity"
+            android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer"
+            />
     </application>
 </manifest>

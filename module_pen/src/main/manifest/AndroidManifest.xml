@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kkkkkn.module_screen">
+    package="com.kkkkkn.module_pen">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FactoryTest">
         <activity
-            android:name=".touch.TouchActivity"
+            android:name=".a83.A83Activity"
             android:exported="false"
             android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer">
             <meta-data
@@ -18,7 +18,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".bad_points.BadPointsActivity"
+            android:name=".a33.A33Activity"
             android:exported="false"
             android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer">
             <meta-data
@@ -26,15 +26,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".black_light.BlackLightActivity"
-            android:exported="false"
-            android:theme="@style/ThemeOverlay.FactoryTest.FullscreenContainer">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ScreenActivity"
+            android:name=".PenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

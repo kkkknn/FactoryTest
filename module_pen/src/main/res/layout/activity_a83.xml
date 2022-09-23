@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    tools:context=".a83.A83Activity">
+
+    <TextView
+        android:id="@+id/show_version"
+        android:textSize="22sp"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.kkkkkn.module_pen.a83.PenView
+            android:id="@+id/gameview"
+            android:layout_width="400dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            tools:ignore="MissingClass" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_start"
+                android:textColor="@color/colorBlack"
+                android:layout_marginHorizontal="20dp"
+                android:text="开始签字"
+                android:background="@drawable/ripple_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btn_clear"
+                android:textColor="@color/colorBlack"
+                android:text="清屏"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/ripple_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:background="@drawable/ripple_bg"
+                android:textColor="@color/colorBlack"
+                android:id="@+id/btn_stop"
+                android:layout_marginHorizontal="20dp"
+                android:text="停止签字"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

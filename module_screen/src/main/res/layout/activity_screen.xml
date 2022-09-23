@@ -7,28 +7,31 @@
     tools:context=".ScreenActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_blackLight"
-            android:layout_margin="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:textSize="25sp"
             android:text="@string/lcd_blackLight"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_badPoints"
-            android:layout_margin="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_width="300dp"
+            android:textSize="25sp"
+            android:layout_height="100dp"
             android:text="@string/lcd_badPoints" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_touch"
-            android:layout_margin="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="25sp"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
             android:text="@string/lcd_touch"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
