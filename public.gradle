@@ -1,8 +1,8 @@
 
 project.ext {
     //是否允许module单独调试
-    isModuleDebug = false
-    moduleName = "module_finger"//单独调试module名
+    isModuleDebug = true
+    moduleName = "module_wifi"//单独调试module名
     //基础信息配置
     compileSdkVersion = 32
     buildToolsVersion = "32"
@@ -147,6 +147,7 @@ project.ext {
             }else {
                 extension.api 'com.alibaba:arouter-api:1.5.2'//ARouter依赖
                 extension.api 'com.github.GrenderG:Toasty:1.5.2' //toast 框架
+                extension.api 'com.github.getActivity:XXPermissions:16.2' //XXPermissions 框架
             }
             //针对每个Module单独进行依赖
             switch (appImplementation) {
@@ -155,6 +156,7 @@ project.ext {
                     extension.implementation extension.project(path: ':module_screen')
                     extension.implementation extension.project(path: ':module_pen')
                     extension.implementation extension.project(path: ':module_finger')
+                    extension.implementation extension.project(path: ':module_wifi')
                     break
                 case "lib_base":
 
@@ -164,6 +166,9 @@ project.ext {
                     break
                 case "module_pen":
                     extension.implementation files('libs/zc_penutil_v6.jar')
+                    break
+                case "module_wifi":
+                    extension.api 'com.github.zcweng:switch-button:0.0.3@aar'
                     break
                 case "module_finger":
                     extension.implementation files('libs/zcfinger_util.jar')

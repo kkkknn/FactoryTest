@@ -276,12 +276,13 @@ public class ZKActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(mbStart){
+            mContext.unregisterReceiver(mUsbReceiver);
+        }
         CloseDevice();  //尝试关闭设备
         // Destroy fingerprint sensor when it's not used
         NIDFPFactory.destroy(mNIDFPSensor);
-        if(mUsbReceiver!=null){
-            mContext.unregisterReceiver(mUsbReceiver);
-        }
+
     }
 
     @Override

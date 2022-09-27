@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="WifiSignalIcon">
+        <attr name="signalLevel" format="integer" />
+    </declare-styleable>
+</resources>

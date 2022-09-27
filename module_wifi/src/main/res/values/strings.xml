@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">module_wifi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_bluetooth">蓝牙</string>
+    <string name="tab_wifi">WIFI</string>
+    <string name="wifi_state">当前网络信息</string>
+    <string name="wifi_list">搜索到的WIFI列表</string>
+    <string name="wifi_name">当前连接wifi：</string>
+    <string name="wifi_pwdType">加密方式：</string>
+
+    <string name="wifi_pwdType_0">无密码</string>
+    <string name="wifi_pwdType_1">WEP</string>
+    <string name="wifi_pwdType_2">WPA/WAP2 PSK</string>
+    <string name="wifi_pwd">wifi密码</string>
+    <string name="wifi_conn_type">wifi连接类型</string>
+    <string name="wifi_connType_static">静态IP</string>
+    <string name="wifi_connType_dhcp">DHCP</string>
+
+    <string name="wifi_static_ip">IP地址</string>
+    <string name="wifi_static_dns">DNS地址</string>
+    <string name="wifi_static_gateway">网关</string>
+
+
+    <string name="wifi_static_ip_emp">192.168.0.222</string>
+    <string name="wifi_static_dns_emp">8.8.8.8</string>
+    <string name="wifi_static_gateway_emp">192.168.0.1</string>
+
+    <string name="btn_connect">连接WiFi</string>
+</resources>
