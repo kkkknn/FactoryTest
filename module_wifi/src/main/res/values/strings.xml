@@ -27,4 +27,5 @@
     <string name="wifi_static_gateway_emp">192.168.0.1</string>
 
     <string name="btn_connect">连接WiFi</string>
+    <string name="wifi_btn">WIFI开关</string>
 </resources>

@@ -33,14 +33,13 @@ public class WifiActivity extends AppCompatActivity {
     }
 
     private void checkWifiPermission() {
+
         XXPermissions.with(this)
                 // 申请单个权限
                 .permission(Permission.Group.BLUETOOTH)
                 // 申请多个权限
                 .permission(Permission.ACCESS_FINE_LOCATION)
                 .permission(Permission.ACCESS_COARSE_LOCATION)
-                .permission(Permission.ACCESS_BACKGROUND_LOCATION)
-                .permission(Permission.NEARBY_WIFI_DEVICES)
                 // 设置权限请求拦截器（局部设置）
                 //.interceptor(new PermissionInterceptor())
                 // 设置不触发错误检测机制（局部设置）

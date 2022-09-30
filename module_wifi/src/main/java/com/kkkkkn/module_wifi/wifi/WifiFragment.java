@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,12 +34,15 @@ import com.suke.widget.SwitchButton;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class WifiFragment extends Fragment {
     public static final String TAG="WifiFragment";
-    private RecyclerView recyclerView;
+    private WifiAdapter wifiAdapter;
     private SwitchButton switchButton;
     private WifiControlUtil wifiControlUtil;
     private AppCompatTextView wifi_state_ip;
@@ -96,7 +100,6 @@ public class WifiFragment extends Fragment {
         wifi_state_ip=view.findViewById(R.id.wifi_state_connIp);
         wifi_state_name=view.findViewById(R.id.wifi_state_connName);
 
-        recyclerView=view.findViewById(R.id.wifi_recyclerView);
         switchButton=view.findViewById(R.id.switch_button);
 
         switchButton.setOnCheckedChangeListener((view1, isChecked) -> {
@@ -104,16 +107,17 @@ public class WifiFragment extends Fragment {
                 wifiControlUtil.openWifi();
             }else {
                 wifiControlUtil.closeWifi();
+                wifiViewItemList.clear();
+                wifiAdapter.notifyDataSetChanged();
             }
         });
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.wifi_recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
-        WifiAdapter adapter = new WifiAdapter(wifiViewItemList);
-        recyclerView.setAdapter(adapter);
-
-        adapter.setOnItemOnClickListener(new WifiAdapter.OnItemOnClickListener() {
+        wifiAdapter = new WifiAdapter(wifiViewItemList);
+        recyclerView.setAdapter(wifiAdapter);
+        wifiAdapter.setOnItemOnClickListener(new WifiAdapter.OnItemOnClickListener() {
             @Override
             public void onClick(int position) {
                 Log.i(TAG, "onClick: 点击了"+wifiViewItemList.get(position).getName());
@@ -138,16 +142,32 @@ public class WifiFragment extends Fragment {
 
     private void syncWifiList(){
         ArrayList<ScanResult> scanResults=wifiControlUtil.searchWifi();
-        wifiViewItemList.clear();
+        ArrayList<WifiViewItem> wifiViewItemArrayList=new ArrayList<>();
         for (ScanResult result:scanResults) {
             WifiViewItem wifiViewItem=new WifiViewItem();
             wifiViewItem.setName(result.SSID);
 
             int nSigLevel = WifiManager.calculateSignalLevel(
                     result.level, 5);
+            Log.i(TAG, result.SSID+"信号 : "+nSigLevel);
             wifiViewItem.setSignalLevel(nSigLevel);
-            wifiViewItemList.add(wifiViewItem);
+            wifiViewItemArrayList.add(wifiViewItem);
         }
+        //按照信号强度排序
+        Collections.sort(wifiViewItemArrayList, new Comparator<WifiViewItem>() {
+            @Override
+            public int compare(WifiViewItem wifiViewItem, WifiViewItem t1) {
+                if(wifiViewItem.getSignalLevel()<t1.getSignalLevel()){
+                    return 1;
+                }else if(wifiViewItem.getSignalLevel()>t1.getSignalLevel()) {
+                    return -1;
+                }else{
+                    return 0;
+                }
+            }
+        });
+        wifiViewItemList.clear();
+        wifiViewItemList.addAll(wifiViewItemArrayList);
     }
 
 
@@ -158,7 +178,7 @@ public class WifiFragment extends Fragment {
         sb.append((ip >> 8) & 0xFF).append(".");
         sb.append((ip >> 16) & 0xFF).append(".");
         sb.append((ip >> 24) & 0xFF);
-        return "IP地址："+sb.toString();
+        return sb.toString();
     }
 
     @Override

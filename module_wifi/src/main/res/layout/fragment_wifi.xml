@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/wifi_state"
+                    android:text="@string/wifi_btn"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -43,7 +43,8 @@
                 android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="4dp"
                 android:id="@+id/wifi_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -51,7 +52,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TableLayout
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TableRow>
