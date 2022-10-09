@@ -1,38 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:columnCount="4"
+    android:orientation="horizontal">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center"
         android:text="信号强度"
+        android:layout_width="100dp"
+        android:layout_height="30dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/signal_level"
+        android:layout_columnSpan="3"
+        android:text="较强"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-
     <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center"
         android:text="安全性"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="100dp"
+        android:layout_height="30dp"/>
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:text="安全性"
+        android:id="@+id/safety_name"
+        android:layout_columnSpan="3"
+        android:text="WPA/WPA2 PSK"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-
     <androidx.appcompat.widget.AppCompatTextView
-        android:text="信号强度"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center"
         android:text="密码"
+        android:layout_width="100dp"
+        android:layout_height="30dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_password"
+        android:layout_columnSpan="2"
+        android:inputType="textPassword"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox_password"
+        android:text="显示密码"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_columnSpan="4"
+        android:id="@+id/checkbox_advanced"
+        android:text="显示高级选项"
+        android:checked="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+<!--    <androidx.appcompat.widget.AppCompatTextView
+        android:text="代理"
+        android:gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="30dp"/>
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:text="无"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:layout_columnSpan="2"
+        android:text="手动"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_columnSpan="4"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:paddingHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center"
+            android:text="浏览器会使用http代理，但其他应用可能不会使用"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="代理服务器主机名"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="代理服务器端口"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_advanced"
+        android:layout_columnSpan="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:gravity="center"
+            android:text="IP设置"
+            android:layout_width="100dp"
+            android:layout_height="30dp"/>
+
+
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radio_dhcp"
+                android:text="DHCP"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radio_static"
+                android:layout_columnSpan="2"
+                android:text="静态IP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_staticIP"
+        android:layout_columnSpan="4"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:paddingHorizontal="20dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="IP地址"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:hint="192.168.1.128"
+                android:layout_weight="1"
+                android:id="@+id/edit_static_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="网关"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:hint="192.168.1.1"
+                android:id="@+id/edit_static_dns"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="网络前缀长度"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_static_nameLen"
+                android:hint="24"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="域名1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_static_name1"
+                android:hint="8.8.8.8"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:gravity="center"
+                android:text="域名2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_static_name2"
+                android:hint="8.8.8.8"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_columnSpan="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_weight="1"
+            android:paddingHorizontal="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="取消" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ok"
+            android:enabled="false"
+            android:layout_weight="1"
+            android:paddingHorizontal="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="连接" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</GridLayout>

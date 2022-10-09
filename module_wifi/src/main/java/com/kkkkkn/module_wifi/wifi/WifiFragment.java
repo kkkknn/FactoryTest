@@ -1,5 +1,7 @@
 package com.kkkkkn.module_wifi.wifi;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +29,7 @@ import android.view.ViewGroup;
 
 import com.kkkkkn.module_wifi.R;
 import com.kkkkkn.module_wifi.wifi.util.WifiControlUtil;
+import com.kkkkkn.module_wifi.wifi.view.DialogConnWifi;
 import com.kkkkkn.module_wifi.wifi.view.WifiAdapter;
 import com.kkkkkn.module_wifi.wifi.view.WifiViewItem;
 import com.suke.widget.SwitchButton;
@@ -48,6 +51,7 @@ public class WifiFragment extends Fragment {
     private AppCompatTextView wifi_state_ip;
     private AppCompatTextView wifi_state_name;
     private List<WifiViewItem> wifiViewItemList=new ArrayList<>();
+    private DialogConnWifi dialogConnWifi;
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -120,9 +124,20 @@ public class WifiFragment extends Fragment {
         wifiAdapter.setOnItemOnClickListener(new WifiAdapter.OnItemOnClickListener() {
             @Override
             public void onClick(int position) {
-                Log.i(TAG, "onClick: 点击了"+wifiViewItemList.get(position).getName());
+                WifiViewItem item=wifiViewItemList.get(position);
+                Log.i(TAG, "onClick: 点击了"+item.getName());
                 //弹窗并显示连接信息
-
+                dialogConnWifi.setTitle(item.getName());
+                dialogConnWifi.setWifiInfo(item.getSignalLevelStr(),item.getCapabilities());
+                dialogConnWifi.setListener(new DialogConnWifi.Listener() {
+                    @Override
+                    public void onClick() {
+                        Log.i(TAG, "onClick: 哈哈，开始连接");
+                    }
+                });
+                if(!dialogConnWifi.isShowing()){
+                    dialogConnWifi.show();
+                }
             }
         });
 
@@ -138,6 +153,8 @@ public class WifiFragment extends Fragment {
             switchButton.setChecked(true);
             syncWifiList();
         }
+
+        dialogConnWifi=new DialogConnWifi(requireContext());
     }
 
     private void syncWifiList(){
@@ -146,6 +163,7 @@ public class WifiFragment extends Fragment {
         for (ScanResult result:scanResults) {
             WifiViewItem wifiViewItem=new WifiViewItem();
             wifiViewItem.setName(result.SSID);
+            wifiViewItem.setCapabilities(result.capabilities);
 
             int nSigLevel = WifiManager.calculateSignalLevel(
                     result.level, 5);
