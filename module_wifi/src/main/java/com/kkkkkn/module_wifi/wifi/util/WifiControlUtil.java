@@ -24,12 +24,10 @@ import java.util.List;
 //单例模式
 public class WifiControlUtil {
     private volatile static WifiControlUtil wifiControlUtil;
-    private Context mContext;
     private WifiManager mWifiManager;
 
 
     public void setContext(Context context) {
-        this.mContext = context;
         mWifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
@@ -56,8 +54,11 @@ public class WifiControlUtil {
     }
 
     //获取WiFi列表
-    public ArrayList<ScanResult> searchWifi() {
-        List<WifiConfiguration> list=mWifiManager.getConfiguredNetworks();
+    public ArrayList<ScanResult> searchWifi(Context context) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return null;
+        }
+        List<WifiConfiguration> list = mWifiManager.getConfiguredNetworks();
         ArrayList<ScanResult> resultList = new ArrayList<>();
         if (mWifiManager != null && isWifiOpen()) {
             resultList.addAll(mWifiManager.getScanResults());
@@ -66,22 +67,22 @@ public class WifiControlUtil {
     }
 
     //连接WiFi
-    public void connWifi(WifiConfig wifiConfig) {
+    public void connWifi(WifiConfig wifiConfig,Context context) {
         if(wifiConfig==null){
             return;
         }
-        if(wifiConfig.connType==1){
+        if(wifiConfig.connType== WifiConfig.CONNECT_TYPE.DHCP){
             mWifiManager.disableNetwork(mWifiManager.getConnectionInfo().getNetworkId());
-            int netId = mWifiManager.addNetwork(getWifiConfig(wifiConfig.name, wifiConfig.pwd, wifiConfig.pwdType));
+            int netId = mWifiManager.addNetwork(getWifiConfig(wifiConfig.name, wifiConfig.pwd, wifiConfig.pwdType,context));
             mWifiManager.enableNetwork(netId, true);
-        }else if(wifiConfig.connType==0){
+        }else if(wifiConfig.connType==WifiConfig.CONNECT_TYPE.STATIC){
             mWifiManager.disableNetwork(mWifiManager.getConnectionInfo().getNetworkId());
             int netId = 0;
             try {
                 InetAddress[] addresses=new InetAddress[1];
                 addresses[0]=InetAddress.getByName(wifiConfig.staticConnConfig.dns_ip);
                 netId = mWifiManager.addNetwork(setStaticIpConfiguration(
-                        getWifiConfig(wifiConfig.name, wifiConfig.pwd, wifiConfig.pwdType),
+                        getWifiConfig(wifiConfig.name, wifiConfig.pwd, wifiConfig.pwdType,context),
                         InetAddress.getByName(wifiConfig.staticConnConfig.this_ip),
                         24,
                         InetAddress.getByName(wifiConfig.staticConnConfig.gateWay_ip),
@@ -114,7 +115,7 @@ public class WifiControlUtil {
     }
 
 
-    private WifiConfiguration getWifiConfig(String ssid, String pws, int type){
+    private WifiConfiguration getWifiConfig(String ssid, String pws, WifiConfig.PWD_TYPE type, Context context){
         WifiConfiguration config = new WifiConfiguration();
         config.allowedAuthAlgorithms.clear();
         config.allowedGroupCiphers.clear();
@@ -123,11 +124,12 @@ public class WifiControlUtil {
         config.allowedProtocols.clear();
         config.SSID = "\"" + ssid + "\"";
 
-        WifiConfiguration tempConfig = isExist(ssid);
+        WifiConfiguration tempConfig = isExist(ssid,context);
         if(tempConfig != null) {
             mWifiManager.removeNetwork(tempConfig.networkId);
         }
-        if (type==1){
+        if (type==WifiConfig.PWD_TYPE.WEP){
+            //WEP
             config.hiddenSSID = true;
             config.wepKeys[0]= "\""+pws+"\"";
             config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.SHARED);
@@ -137,7 +139,8 @@ public class WifiControlUtil {
             config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP104);
             config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
             config.wepTxKeyIndex = 0;
-        }else if(type==2){
+        }else if(type==WifiConfig.PWD_TYPE.WPA_PSK){
+            //WPA
             config.preSharedKey = "\""+pws+"\"";
             config.hiddenSSID = true;
             config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
@@ -155,8 +158,8 @@ public class WifiControlUtil {
     }
 
 
-    private WifiConfiguration isExist(String ssid) {
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    private WifiConfiguration isExist(String ssid,Context context) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return null;
         }
         List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.FrameStats;
+import android.view.View;
 import android.widget.TableLayout;
 
 import com.google.android.material.tabs.TabLayout;
@@ -33,7 +35,6 @@ public class WifiActivity extends AppCompatActivity {
     }
 
     private void checkWifiPermission() {
-
         XXPermissions.with(this)
                 // 申请单个权限
                 .permission(Permission.Group.BLUETOOTH)
@@ -73,6 +74,9 @@ public class WifiActivity extends AppCompatActivity {
         viewPager2=findViewById(R.id.view_pager2);
 
         viewPager2.setAdapter(new PageAdapter(this));
+
+        //禁止左右滑动
+        viewPager2.setUserInputEnabled(false);
 
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override

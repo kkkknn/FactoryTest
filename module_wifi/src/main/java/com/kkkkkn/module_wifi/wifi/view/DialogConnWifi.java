@@ -21,6 +21,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.kkkkkn.module_wifi.R;
+import com.kkkkkn.module_wifi.wifi.bean.StaticConnConfig;
+import com.kkkkkn.module_wifi.wifi.bean.WifiConfig;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +35,8 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
     private AppCompatRadioButton radio_static,radio_dhcp;
     private AppCompatButton btn_cancel,btn_ok;
     private Listener listener;
-    private AppCompatEditText edit_static_ip,edit_static_dns,edit_static_nameLen,edit_static_name1,edit_static_name2;
+    private String wifiName;
+    private AppCompatEditText edit_static_ip,edit_static_gateWay,edit_static_dns;
 
     public DialogConnWifi(@NonNull Context context) {
         super(context);
@@ -45,9 +48,10 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
     }
 
     //设置wifi信息
-    public void setWifiInfo(String signal,String safety){
+    public void setWifiInfo(String name,String signal,String safety){
         tv_level.setText(signal);
         tv_safety.setText(safety);
+        wifiName=name;
     }
 
     private void initView() {
@@ -73,10 +77,8 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
         btn_cancel=findViewById(R.id.btn_cancel);
         btn_ok=findViewById(R.id.btn_ok);
         edit_static_ip=findViewById(R.id.edit_static_ip);
+        edit_static_gateWay=findViewById(R.id.edit_static_gateWay);
         edit_static_dns=findViewById(R.id.edit_static_dns);
-        edit_static_nameLen=findViewById(R.id.edit_static_nameLen);
-        edit_static_name1=findViewById(R.id.edit_static_name1);
-        edit_static_name2=findViewById(R.id.edit_static_name2);
 
         edit_password.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,8 +103,7 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
 
         edit_static_ip.addTextChangedListener(this);
         edit_static_dns.addTextChangedListener(this);
-        edit_static_name1.addTextChangedListener(this);
-        edit_static_name2.addTextChangedListener(this);
+        edit_static_gateWay.addTextChangedListener(this);
 
         check_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -157,10 +158,62 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onClick();
+                WifiConfig wifiConfig=new WifiConfig();
+                wifiConfig.name=wifiName;
+                Editable editable= edit_password.getText();
+                if(editable==null){
+                   return;
+                }
+                //写入密码 加密类型
+                wifiConfig.pwdType=getPasswordType();
+                wifiConfig.pwd=editable.toString();
+                if(radio_static.isChecked()){
+                    wifiConfig.connType=WifiConfig.CONNECT_TYPE.STATIC;
+                    //写入静态IP配置
+                    wifiConfig.staticConnConfig=getStaticConnConfig();
+                }
+                if(radio_dhcp.isChecked()){
+                    wifiConfig.connType=WifiConfig.CONNECT_TYPE.DHCP;
+                }
+                listener.onClick(wifiConfig);
+
+                dismiss();
             }
         });
 
+    }
+
+    private StaticConnConfig getStaticConnConfig() {
+        StaticConnConfig staticConnConfig=new StaticConnConfig();
+        Editable editable_ip=edit_static_ip.getText();
+        Editable editable_dns=edit_static_dns.getText();
+        Editable editable_gateWay=edit_static_gateWay.getText();
+        if(editable_ip!=null){
+            staticConnConfig.this_ip=editable_ip.toString();
+        }
+        if(editable_dns!=null){
+            staticConnConfig.dns_ip=editable_gateWay.toString();
+        }
+        if(editable_gateWay!=null){
+            staticConnConfig.gateWay_ip=editable_dns.toString();
+        }
+        return staticConnConfig;
+    }
+
+    private WifiConfig.PWD_TYPE getPasswordType() {
+        CharSequence charSequence=tv_safety.getText();
+        if(charSequence==null||charSequence.length()==0){
+            return WifiConfig.PWD_TYPE.WPA_PSK;
+        }
+        String str=charSequence.toString();
+        if(str.contains("WEP")){
+            return WifiConfig.PWD_TYPE.WEP;
+        }else if(str.contains("WPA_PSK")){
+            return WifiConfig.PWD_TYPE.WPA_PSK;
+        }else if(str.contains("WPA2_PSK")){
+            return WifiConfig.PWD_TYPE.WPA_PSK;
+        }
+        return WifiConfig.PWD_TYPE.WPA_PSK;
     }
 
     public void setListener(Listener listener) {
@@ -182,7 +235,7 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
     }
 
     public interface Listener{
-        void onClick();
+        void onClick(WifiConfig wifiConfig);
     }
 
     private boolean checkPasswordComplete(){
@@ -195,59 +248,20 @@ public class DialogConnWifi extends Dialog implements TextWatcher {
         //判断内容是否为IP
         Editable editable_static_ip=edit_static_ip.getText();
         Editable editable_static_dns=edit_static_dns.getText();
-        Editable editable_static_name1=edit_static_name1.getText();
-        Editable editable_static_name2=edit_static_name2.getText();
+        Editable editable_static_gateWay=edit_static_gateWay.getText();
         if (isEditTextEmpty(editable_static_ip)
                 || isEditTextEmpty(editable_static_dns)
-                || isEditTextEmpty(editable_static_name1)
-                || isEditTextEmpty(editable_static_name2)) {
+                || isEditTextEmpty(editable_static_gateWay)) {
             //是否为空
             return false;
         }else {
             //是否为IP
             return  isIpLegal(editable_static_ip.toString())
                     || isIpLegal(editable_static_dns.toString())
-                    || isIpLegal(editable_static_name1.toString())
-                    || isIpLegal(editable_static_name2.toString());
+                    || isIpLegal(editable_static_gateWay.toString());
         }
     }
 
-    //判断是否信息填写完整，可以进行连接
-    private void checkComplete(){
-        //密码完整性
-        Editable editable_password=edit_password.getText();
-        if(isEditTextEmpty(editable_password)||editable_password.toString().length()<8){
-            btn_ok.setEnabled(false);
-            return;
-        }
-
-        //是否设置了静态IP
-        if(radio_static.isChecked()){
-            //判断内容是否为IP
-            Editable editable_static_ip=edit_static_ip.getText();
-            Editable editable_static_dns=edit_static_dns.getText();
-            Editable editable_static_name1=edit_static_name1.getText();
-            Editable editable_static_name2=edit_static_name2.getText();
-            if (isEditTextEmpty(editable_static_ip)
-                    || isEditTextEmpty(editable_static_dns)
-                    || isEditTextEmpty(editable_static_name1)
-                    || isEditTextEmpty(editable_static_name2)) {
-                //是否为空
-                btn_ok.setEnabled(false);
-            }else {
-                //是否为IP
-                btn_ok.setEnabled(isIpLegal(editable_static_ip.toString())
-                        || isIpLegal(editable_static_dns.toString())
-                        || isIpLegal(editable_static_name1.toString())
-                        || isIpLegal(editable_static_name2.toString()));
-            }
-            Log.i("TAG", "checkComplete: radio_static11");
-        }else {
-            btn_ok.setEnabled(true);
-            Log.i("TAG", "checkComplete: radio_static222");
-        }
-
-    }
 
 
     public static boolean isIpLegal(String ipStr) {
