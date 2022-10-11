@@ -28,4 +28,6 @@
 
     <string name="btn_connect">连接WiFi</string>
     <string name="wifi_btn">WIFI开关</string>
+    <string name="bluetooth_list">搜索到的蓝牙列表</string>
+    <string name="bluetooth_switch">蓝牙开关</string>
 </resources>
