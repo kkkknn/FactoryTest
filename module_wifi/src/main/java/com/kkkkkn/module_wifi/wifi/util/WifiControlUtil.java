@@ -26,6 +26,20 @@ public class WifiControlUtil {
     private volatile static WifiControlUtil wifiControlUtil;
     private WifiManager mWifiManager;
 
+    private WifiControlUtil(){
+
+    }
+
+    public static WifiControlUtil getInstance(){
+        if(wifiControlUtil==null){
+            synchronized (WifiControlUtil.class){
+                if(wifiControlUtil==null){
+                    wifiControlUtil=new WifiControlUtil();
+                }
+            }
+        }
+        return wifiControlUtil;
+    }
 
     public void setContext(Context context) {
         mWifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);

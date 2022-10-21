@@ -183,7 +183,7 @@ public class WifiFragment extends Fragment {
 
     private void initData() {
 
-        wifiControlUtil = new WifiControlUtil();
+        wifiControlUtil = WifiControlUtil.getInstance();
         wifiControlUtil.setContext(requireContext());
 
         if (wifiControlUtil.isWifiOpen()) {
@@ -209,7 +209,6 @@ public class WifiFragment extends Fragment {
 
             int nSigLevel = WifiManager.calculateSignalLevel(
                     result.level, 5);
-            Log.i(TAG, result.SSID + "信号 : " + nSigLevel);
             wifiViewItem.setSignalLevel(nSigLevel);
             wifiViewItemArrayList.add(wifiViewItem);
         }

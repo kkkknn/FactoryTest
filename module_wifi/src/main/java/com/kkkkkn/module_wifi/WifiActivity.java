@@ -9,6 +9,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.FrameStats;
 import android.view.View;
 import android.widget.TableLayout;
@@ -24,6 +26,7 @@ import java.util.List;
 public class WifiActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    public static final String TAG="WifiActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,38 +34,49 @@ public class WifiActivity extends AppCompatActivity {
 
         initView();
 
-        checkWifiPermission();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                checkPermission();
+            }
+        }, 1000);
     }
 
-    private void checkWifiPermission() {
+    private void checkPermission() {
+        Log.i(TAG, "checkPermission: 开始检查权限");
         XXPermissions.with(this)
                 // 申请单个权限
                 .permission(Permission.Group.BLUETOOTH)
                 // 申请多个权限
                 .permission(Permission.ACCESS_FINE_LOCATION)
                 .permission(Permission.ACCESS_COARSE_LOCATION)
+                .permission(Permission.BLUETOOTH_CONNECT)
+                .permission(Permission.BLUETOOTH_SCAN)
+                .permission(Permission.BLUETOOTH_ADVERTISE)
                 // 设置权限请求拦截器（局部设置）
                 //.interceptor(new PermissionInterceptor())
                 // 设置不触发错误检测机制（局部设置）
                 //.unchecked()
                 .request(new OnPermissionCallback() {
-
                     @Override
                     public void onGranted(List<String> permissions, boolean all) {
                         if (!all) {
-                            //toast("获取部分权限成功，但部分权限未正常授予");
+                            Log.i(TAG,"获取部分权限成功，但部分权限未正常授予");
                             return;
                         }
+                        Log.i(TAG,"获取录音和日历权限成功");
                         //toast("获取录音和日历权限成功");
                     }
 
                     @Override
                     public void onDenied(List<String> permissions, boolean never) {
                         if (never) {
+                            Log.i(TAG,"被永久拒绝授权，请手动授予录音和日历权限");
                            // toast("被永久拒绝授权，请手动授予录音和日历权限");
                             // 如果是被永久拒绝就跳转到应用权限系统设置页面
                             XXPermissions.startPermissionActivity(getApplicationContext(), permissions);
                         } else {
+                            Log.i(TAG,"获取录音和日历权限失败");
                             //toast("获取录音和日历权限失败");
                         }
                     }

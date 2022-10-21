@@ -15,10 +15,10 @@ import com.kkkkkn.module_wifi.wifi.view.WifiViewItem;
 
 import java.util.List;
 
-public class BluetoothAdapter extends  RecyclerView.Adapter <BluetoothAdapter.ViewHolder>{
+public class BluetoothCustomAdapter extends  RecyclerView.Adapter <BluetoothCustomAdapter.ViewHolder>{
     private List<BluetoothViewItem> viewItemList;
 
-    public BluetoothAdapter(List<BluetoothViewItem> wifiViewItemList) {
+    public BluetoothCustomAdapter(List<BluetoothViewItem> wifiViewItemList) {
         this.viewItemList=wifiViewItemList;
     }
 
@@ -26,11 +26,11 @@ public class BluetoothAdapter extends  RecyclerView.Adapter <BluetoothAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bluetooth_item,parent,false);
-        return new BluetoothAdapter.ViewHolder(view);
+        return new BluetoothCustomAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BluetoothAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BluetoothCustomAdapter.ViewHolder holder, int position) {
         BluetoothViewItem item = viewItemList.get(position);
         holder.bluetoothName.setText(item.getName());
     }
