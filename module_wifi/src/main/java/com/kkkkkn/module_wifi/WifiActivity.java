@@ -15,14 +15,17 @@ import android.view.FrameStats;
 import android.view.View;
 import android.widget.TableLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
+import com.kkkkkn.lib_common.router.CommonRouterConstant;
 
 import java.util.List;
 
+@Route(path = CommonRouterConstant.WIFI)
 public class WifiActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;

@@ -13,5 +13,10 @@ public class CommonRouterConstant {
     //指纹页面
     public static final String PEN = "/pen/main";
 
+    //麦克风&喇叭页面
+    public static final String MIC = "/mic/main";
+
+    //摄像头页面
+    public static final String CAMERA = "/camera/main";
 
 }

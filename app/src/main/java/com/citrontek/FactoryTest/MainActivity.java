@@ -93,6 +93,12 @@ public class MainActivity extends CommonActivity implements View.OnClickListener
             ARouter.getInstance().build(CommonRouterConstant.PEN).navigation();
         }else if(id==R.id.btn_finger){
             ARouter.getInstance().build(CommonRouterConstant.FINGER).navigation();
+        }else if(id==R.id.btn_wifi){
+            ARouter.getInstance().build(CommonRouterConstant.WIFI).navigation();
+        }else if(id==R.id.btn_speaker_mic){
+            ARouter.getInstance().build(CommonRouterConstant.MIC).navigation();
+        }else if(id==R.id.btn_camera){
+            ARouter.getInstance().build(CommonRouterConstant.CAMERA).navigation();
         }
     }
 }

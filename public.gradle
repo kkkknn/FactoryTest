@@ -2,7 +2,7 @@
 project.ext {
     //是否允许module单独调试
     isModuleDebug = true
-    moduleName = "module_wifi"//单独调试module名
+    moduleName = "module_mic"//单独调试module名
     //基础信息配置
     compileSdkVersion = 32
     buildToolsVersion = "32"
@@ -15,6 +15,7 @@ project.ext {
     //设置app配置
     setAppDefaultConfig = {
         extension ->
+
             //指定为application
             extension.apply plugin: 'com.android.application'
             extension.description "app"
@@ -37,6 +38,7 @@ project.ext {
             extension.compileSdkVersion project.ext.compileSdkVersion
             extension.buildToolsVersion project.ext.buildToolsVersion
             extension.defaultConfig {
+                multiDexEnabled true
                 applicationId project.ext.applicationId
                 minSdkVersion project.ext.minSdkVersion
                 targetSdkVersion project.ext.targetSdkVersion
@@ -157,6 +159,8 @@ project.ext {
                     extension.implementation extension.project(path: ':module_pen')
                     extension.implementation extension.project(path: ':module_finger')
                     extension.implementation extension.project(path: ':module_wifi')
+                    extension.implementation extension.project(path: ':module_mic')
+                    extension.api 'com.android.support:multidex:1.0.3'
                     break
                 case "lib_base":
 
@@ -176,6 +180,9 @@ project.ext {
                     extension.implementation files('libs/zkandroidcore.jar')
                     extension.implementation files('libs/zkandroidnidfpsensor.jar')
                     break
+                case "module_mic":
+
+                    break;
             }
     }
 }
