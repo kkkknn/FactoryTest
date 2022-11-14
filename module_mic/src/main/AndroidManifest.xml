@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name="com.citrontek.mocule_mic.MicActivity"
+            android:name="com.citrontek.module_mic.MicActivity"
             android:exported="true">
         </activity>
     </application>

@@ -1,4 +1,4 @@
-package com.citrontek.mocule_mic;
+package com.citrontek.module_mic;
 
 import org.junit.Test;
 
