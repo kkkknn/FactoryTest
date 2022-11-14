@@ -76,7 +76,7 @@ public class WifiAdapter extends  RecyclerView.Adapter <WifiAdapter.ViewHolder> 
         return viewItemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         AppCompatImageView imageView;
         AppCompatTextView wifiName;
         public ViewHolder( View itemView) {

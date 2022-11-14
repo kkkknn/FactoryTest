@@ -26,13 +26,18 @@ public class BluetoothCustomAdapter extends  RecyclerView.Adapter <BluetoothCust
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bluetooth_item,parent,false);
-        return new BluetoothCustomAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BluetoothCustomAdapter.ViewHolder holder, int position) {
         BluetoothViewItem item = viewItemList.get(position);
-        holder.bluetoothName.setText(item.getName());
+        if(item != null){
+            String name=item.getName();
+            if(name!=null&&!name.isEmpty()){
+                holder.bluetoothName.setText(name);
+            }
+        }
     }
 
     @Override
@@ -40,11 +45,11 @@ public class BluetoothCustomAdapter extends  RecyclerView.Adapter <BluetoothCust
         return viewItemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         AppCompatTextView bluetoothName;
         public ViewHolder( View itemView) {
             super(itemView);
-            bluetoothName = itemView.findViewById(R.id.wifi_name);
+            bluetoothName = itemView.findViewById(R.id.bluetooth_name);
         }
     }
 }

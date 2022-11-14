@@ -140,7 +140,6 @@ public class WifiFragment extends Fragment {
                 }, 1000);  //延迟10秒执行
             }
         });
-
         switchButton.setOnCheckedChangeListener((view1, isChecked) -> {
             if (isChecked) {
                 wifiControlUtil.openWifi();
@@ -148,6 +147,9 @@ public class WifiFragment extends Fragment {
                 wifiControlUtil.closeWifi();
                 wifiViewItemList.clear();
                 wifiAdapter.notifyDataSetChanged();
+                //wifi关闭之后，清空右侧信息显示
+                wifi_state_name.setText("暂无网络连接");
+                wifi_state_ip.setText("");
             }
         });
 
@@ -254,6 +256,7 @@ public class WifiFragment extends Fragment {
 
         requireActivity().registerReceiver(broadcastReceiver, intentFilter);//注册广播
     }
+
 
     //显示加载框
     private void showLoadDialog() {

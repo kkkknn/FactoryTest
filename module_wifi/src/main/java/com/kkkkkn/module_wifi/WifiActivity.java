@@ -34,12 +34,7 @@ public class WifiActivity extends AppCompatActivity {
 
         initView();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                checkPermission();
-            }
-        }, 1000);
+        checkPermission();
     }
 
     private void checkPermission() {
@@ -50,9 +45,6 @@ public class WifiActivity extends AppCompatActivity {
                 // 申请多个权限
                 .permission(Permission.ACCESS_FINE_LOCATION)
                 .permission(Permission.ACCESS_COARSE_LOCATION)
-                .permission(Permission.BLUETOOTH_CONNECT)
-                .permission(Permission.BLUETOOTH_SCAN)
-                .permission(Permission.BLUETOOTH_ADVERTISE)
                 // 设置权限请求拦截器（局部设置）
                 //.interceptor(new PermissionInterceptor())
                 // 设置不触发错误检测机制（局部设置）
@@ -65,7 +57,6 @@ public class WifiActivity extends AppCompatActivity {
                             return;
                         }
                         Log.i(TAG,"获取录音和日历权限成功");
-                        //toast("获取录音和日历权限成功");
                     }
 
                     @Override

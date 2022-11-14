@@ -28,26 +28,41 @@
                 android:layout_height="wrap_content" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bluetooth_list"
-            android:textColor="@color/black" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="vertical"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh"
-            android:layout_width = "match_parent"
-            android:layout_height = "match_parent">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bluetooth_list"
+                    android:textColor="@color/black" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="4dp"
-                android:id="@+id/bluetooth_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/refresh"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent">
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="4dp"
+                        android:id="@+id/bluetooth_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

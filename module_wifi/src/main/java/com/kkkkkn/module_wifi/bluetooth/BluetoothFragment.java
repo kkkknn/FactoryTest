@@ -7,14 +7,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +54,6 @@ public class BluetoothFragment extends Fragment {
     private BluetoothUtil bluetoothUtil;
     private boolean isSupportBluetooth=false;
     private boolean isOpenBluetooth=false;
-    private Handler handler;
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -63,10 +65,19 @@ public class BluetoothFragment extends Fragment {
                     case BluetoothDevice.ACTION_FOUND:
                         //搜索到蓝牙设备了
                         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                            return ;
+                        try {
+                            BluetoothViewItem item=new BluetoothViewItem();
+                            String name=device.getName();
+                            if(name==null){
+                                name=device.getAddress();
+                            }
+                            item.setName(name);
+                            int position=bluetoothViewItems.size();
+                            bluetoothViewItems.add(item);
+                            bluetoothAdapter.notifyItemInserted(position);
+                        }catch (SecurityException e){
+                            e.printStackTrace();
                         }
-                        Log.d(TAG, device.getName());
                         break;
                     case BluetoothAdapter.ACTION_STATE_CHANGED:
                         int blueState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, 0);
@@ -76,12 +87,17 @@ public class BluetoothFragment extends Fragment {
                                 break;
                             case BluetoothAdapter.STATE_ON:
                                 Log.d(TAG, "蓝牙已经打开");
+                                isOpenBluetooth=true;
+                                if(!bluetoothUtil.searchDevice(requireContext())){
+                                    Log.i(TAG, "onReceive: 搜索失败");   
+                                }
                                 break;
                             case BluetoothAdapter.STATE_TURNING_OFF:
                                 Log.d(TAG, "蓝牙正在关闭");
                                 break;
                             case BluetoothAdapter.STATE_OFF:
                                 Log.d(TAG, "蓝牙已经关闭");
+                                isOpenBluetooth=false;
                                 break;
                         }
                         break;
@@ -111,7 +127,6 @@ public class BluetoothFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //注册静态广播 监听wifi连接状态
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothDevice.ACTION_FOUND);
         intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -121,44 +136,6 @@ public class BluetoothFragment extends Fragment {
 
         requireActivity().registerReceiver(broadcastReceiver, intentFilter);//注册广播
 
-        Log.i(TAG, "checkPermission: 开始检查权限");
-        XXPermissions.with(this)
-                // 申请单个权限
-                .permission(Permission.Group.BLUETOOTH)
-                // 申请多个权限
-                .permission(Permission.ACCESS_FINE_LOCATION)
-                .permission(Permission.ACCESS_COARSE_LOCATION)
-                .permission(Permission.BLUETOOTH_CONNECT)
-                .permission(Permission.BLUETOOTH_SCAN)
-                .permission(Permission.BLUETOOTH_ADVERTISE)
-                // 设置权限请求拦截器（局部设置）
-                //.interceptor(new PermissionInterceptor())
-                // 设置不触发错误检测机制（局部设置）
-                //.unchecked()
-                .request(new OnPermissionCallback() {
-                    @Override
-                    public void onGranted(List<String> permissions, boolean all) {
-                        if (!all) {
-                            Log.i(TAG,"获取部分权限成功，但部分权限未正常授予");
-                            return;
-                        }
-                        Log.i(TAG,"获取录音和日历权限成功");
-                        //toast("获取录音和日历权限成功");
-                    }
-
-                    @Override
-                    public void onDenied(List<String> permissions, boolean never) {
-                        if (never) {
-                            Log.i(TAG,"被永久拒绝授权，请手动授予录音和日历权限");
-                            // toast("被永久拒绝授权，请手动授予录音和日历权限");
-                            // 如果是被永久拒绝就跳转到应用权限系统设置页面
-                            //XXPermissions.startPermissionActivity(getApplicationContext(), permissions);
-                        } else {
-                            Log.i(TAG,"获取录音和日历权限失败");
-                            //toast("获取录音和日历权限失败");
-                        }
-                    }
-                });
     }
 
     @Override
@@ -178,6 +155,24 @@ public class BluetoothFragment extends Fragment {
         bluetoothUtil=BluetoothUtil.getInstance();
 
         isSupportBluetooth=bluetoothUtil.isSupportBluetooth(requireContext());
+
+        //设置初始状态
+        isOpenBluetooth=bluetoothUtil.isBluetoothOpen();
+        if(isOpenBluetooth){
+            //获取已配对设备
+            List<String> names=bluetoothUtil.getPairedDevices(requireContext());
+            for (String str:names) {
+                BluetoothViewItem item=new BluetoothViewItem();
+                item.setName(str);
+                int position=bluetoothViewItems.size();
+                bluetoothViewItems.add(item);
+                bluetoothAdapter.notifyItemInserted(position);
+            }
+
+            bluetoothUtil.searchDevice(requireContext());
+        }
+        switchButton.setChecked(isOpenBluetooth);
+
     }
 
     private void initView(View view) {
@@ -185,33 +180,40 @@ public class BluetoothFragment extends Fragment {
         swipeRefreshLayout=view.findViewById(R.id.refresh);
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
         swipeRefreshLayout.setColorSchemeResources(R.color.teal_700, R.color.flush_color, R.color.purple_700);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if(!isSupportBluetooth||!isOpenBluetooth){
-                    return;
-                }
-                //开始刷新
-                bluetoothViewItems.clear();
-                bluetoothAdapter.notifyDataSetChanged();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //同步加载网络数据
-                        syncWifiList();
-                        bluetoothAdapter.notifyDataSetChanged();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 1000);  //延迟10秒执行
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            if(!isSupportBluetooth||!isOpenBluetooth){
+                Log.i(TAG, "onRefresh: 没打开或者不支持蓝牙");
+                return;
             }
+            new Handler().postDelayed(() -> {
+                bluetoothViewItems.clear();
+                bluetoothAdapter.notifyItemRangeRemoved(0,bluetoothViewItems.size());
+
+                //获取已配对设备
+                List<String> names=bluetoothUtil.getPairedDevices(requireContext());
+                for (String str:names) {
+                    BluetoothViewItem item=new BluetoothViewItem();
+                    item.setName(str);
+                    int position=bluetoothViewItems.size();
+                    bluetoothViewItems.add(item);
+                    bluetoothAdapter.notifyItemInserted(position);
+                }
+                bluetoothUtil.searchDevice(requireContext());
+
+                swipeRefreshLayout.setRefreshing(false);
+            }, 1000);  //延迟1秒执行
         });
 
         switchButton.setOnCheckedChangeListener((view1, isChecked) -> {
             if(!isSupportBluetooth){
                 return;
             }
+            if(!XXPermissions.isGranted(requireContext(),Manifest.permission.BLUETOOTH_CONNECT)){
+                Log.i(TAG, " 无权限返回失败");
+                return;
+            }
             if (isChecked) {
-                if(!bluetoothUtil.openBluetooth(requireContext())){
+                if(!bluetoothUtil.openBluetooth()){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -220,7 +222,7 @@ public class BluetoothFragment extends Fragment {
                     }, 500);
                 }
             } else {
-                if(!bluetoothUtil.closeBluetooth(requireContext())){
+                if(!bluetoothUtil.closeBluetooth()){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -228,8 +230,8 @@ public class BluetoothFragment extends Fragment {
                         }
                     }, 500);
                 }else {
+                    bluetoothAdapter.notifyItemRangeRemoved(0,bluetoothViewItems.size());
                     bluetoothViewItems.clear();
-                    bluetoothAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -242,9 +244,9 @@ public class BluetoothFragment extends Fragment {
 
     }
 
-    //刷新蓝牙列表设备
-    private void syncWifiList() {
-        
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        requireActivity().unregisterReceiver(broadcastReceiver);
     }
-
 }
