@@ -8,17 +8,38 @@
     tools:context="com.citrontek.module_mic.MicActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:text="------录音测试------"
+        android:text="-----录音测试-----"
         android:layout_width="wrap_content"
+        android:textSize="24sp"
         android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tip_record"
+        android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/play_this_time"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/play_finish_time"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -49,18 +70,21 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:text="喇叭测试"
+        android:text="-----喇叭测试-----"
         android:layout_width="wrap_content"
+        android:textSize="24sp"
         android:layout_height="wrap_content"/>
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_tip_play"
+        android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="horizontal"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
